@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href='../static/app.css' />
+    </head>
+    <body>
+        <div class="sidebar">
+            <div class="foodRestrictions">
+                <form id="foodRestrictions">
+                    <label>Recipe Type</label><br></br> 
+                    <select id="type" name="type" multiple>
+                        {% for type in recipeTypes %}
+                        <option value="{{recipetype.recipeTypeID}}">{{recipetype.recipeTypeName}}</option>
+                        {% endfor %}
+                    </select>
+                <br></br>
+                    <label>Cuisine</label><br></br>
+                    <select id="cuisine" name="cuisine" multiple>
+                        {% for type in cuisineTypes %}
+                        <option value="{{cuisinetype.cuisineTypeID}}">{{cuisinetype.cuisineTypeName}}</option>
+                        {% endfor %}
+                    </select>
+                    <br></br>
+                    <label>Foods to Avoid </label><br></br>
+                    <select id="avoid" name="avoid" multiple>
+                        {% for type in avoidTypes %}
+                        <option value="{{foodstoavoid.restrictionID}}">{{foodstoavoid.restrictionName}}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="button" value="Generate!"></input>
+                </form>
+            </div>
+            <div class="newRecipe">
+                <form id="url" action="/get_recipe" method="post">
+                    <input
+                        type="url"
+                        name="url"
+                        placeholder="https://allrecipes.com/..."
+                        required/>
+                    <input type="submit" value="Add Recipe to Database"></button></form>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href='../static/app.css' />
+    </head>
+    <body>
+        <div>{% include 'header.html' %}</div>
+        <div>{% include 'sidebar.html' %}</div>
+        <div>
+            <div id="mainpage">
+                <p><h1>Description of Site</h1></p>
+                <div id="mainbody">
+                    <p>
+                        This app allows you to create a catalog of your favorite recipes by inputting the recipe URL into the <em>Add 
+                        a New Recipe</em> option in the lower-left corner of the homepage and submitting them into the database. Once 
+                        your recipes have been loaded into the database, you can let the app choose which recipe you should cook.
+                    </p>
+                    <p>
+                        While the app does the hard work of picking which recipe to make, you still have some say in what food gets
+                        made. Using the restrictions available on the left side of the screen, the user can tell the app what type
+                        of food they want:
+                        <ul>
+                            <li><em>Recipe Type</em> lets you pick what type of dish they want to cook. Want to make a breakfast dish 
+                                for a weekend brunch, the perfect after-dinner dessert, or an appetizer to snack on? Choose the applicable 
+                                option from this menu.</li>
+                            <li>Whether it's a pasta dish from Italy, a curry from India, or Mexican street food, if you've ever had a 
+                                craving for a specific type of food, the <em>Cuisine</em> menu lets you pick the genre of food you'll be 
+                                eating tonight.</li>
+                            <li>If someone you're cooking for has dietary restrictions, food allergies, or is just a picky eater, the 
+                                <em> Foods to Avoid</em> menu helps you make sure that your next meal can be enjoyed by all.</li>
+                        </ul>
+                    </p>
+                    <p>
+                        Once you've picked what general type of food you'd like to make, click on the <b><em>Generate!</em></b> button and the app will
+                        pick which meal you should make.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
