@@ -85,11 +85,10 @@ select {
   text-align: left;
 }
 
-#recipe {
+#add_recipe {
   position: relative;
   max-width: 80%;
-  padding-top: 10%;
-  margin: auto;
+  margin-bottom: 100px;
 }
 
 #image {
@@ -104,12 +103,6 @@ select {
   padding-left: 8px;
   padding-right: 8px;
   line-height: 1.7;
-}
-
-#source {
-  position: absolute;
-  bottom: 10px;
-  left: 10%;
 }
 
 #recipeButtons {

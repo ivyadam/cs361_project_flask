@@ -11,21 +11,21 @@
                     <label>Recipe Type</label><br></br> 
                     <select id="type" name="type" multiple>
                         {% for type in recipeTypes %}
-                        <option value="{{recipetype.recipeTypeID}}">{{recipetype.recipeTypeName}}</option>
+                        <option value="{{type[0]}}">{{type[1]}}</option>
                         {% endfor %}
                     </select>
                 <br></br>
                     <label>Cuisine</label><br></br>
                     <select id="cuisine" name="cuisine" multiple>
                         {% for type in cuisineTypes %}
-                        <option value="{{cuisinetype.cuisineTypeID}}">{{cuisinetype.cuisineTypeName}}</option>
+                        <option value="{{type[0]}}">{{type[1]}}</option>
                         {% endfor %}
                     </select>
                     <br></br>
                     <label>Foods to Avoid </label><br></br>
                     <select id="avoid" name="avoid" multiple>
                         {% for type in avoidTypes %}
-                        <option value="{{foodstoavoid.restrictionID}}">{{foodstoavoid.restrictionName}}</option>
+                        <option value="{{type0}}">{{type[1]}}</option>
                         {% endfor %}
                     </select>
                     <input type="button" value="Generate!"></input>

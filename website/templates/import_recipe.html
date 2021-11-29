@@ -8,7 +8,7 @@
         <div>
             <div>{% include 'header.html' %}</div>
             <div id="image"><img width="250" height="250" src={{imageURL}}></div>
-            <div id="recipe">
+            <div id="add_recipe">
                 <h1><u>{{name}}</u></h1>
                 <div id="ingredients">
                     <p><h3>Ingredients</h3></p>
@@ -26,14 +26,44 @@
                         {% endfor %}
                     </ul>
                 </div>
-                <br><br><br><br>
-                <div id="source">
-                    Source:  <a href={{recipeURL}} target="_blank">{{recipeURL}}</a>
-                </div>
-                <div id="recipeButtons">
-                    <button id="Delete">Delete</button>
-                    <button id="Print">Print</button>
-                    <button id="Reset">Reset</button>
+                <br><br>
+                <div id="recipeDetails">
+                    <div class="restrictions">
+                        <table>
+                            <tr>
+                                <th>Recipe Type</th>
+                                <th>Cuisine Type</th>
+                                <th>Foods to Avoid</th>
+                            </tr>
+                            <tr>
+                                <form id="restrictions">
+                                    <input type="hidden" name="recipeName" id="recipeName" value="{{name}}">
+                                    <input type="hidden" name="ingredients" id="ingredients" value="{{ingredients}}">
+                                    <input type="hidden" name="instructions" id="instructions" value="{{instructions}}">
+                                    <input type="hidden" name="recipeURL" id="recipeURL" value="{{recipeURL}}">
+                                    <td><select id="type" name="type" multiple>
+                                        {% for type in recipeTypes %}
+                                        <option value="{{type[0]}}">{{type[1]}}</option>
+                                        {% endfor %}
+                                    </select></td>
+                                    <td><select id="cuisine" name="cuisine" multiple>
+                                        {% for type in cuisineTypes %}
+                                        <option value="{{type[0]}}">{{type[1]}}</option>
+                                        {% endfor %}
+                                    </select></td>
+                                    <td><select id="avoid" name="avoid" multiple>
+                                        {% for type in avoidTypes %}
+                                        <option value="{{type[0]}}">{{type[1]}}</option>
+                                        {% endfor %}
+                                    </select></td>
+                                    <td><input type="button" value="Save Recipe" /></td>
+                                </form>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- <div id="source">
+                        Source:  <a href={{recipeURL}} target="_blank">{{recipeURL}}</a>
+                    </div> -->
                 </div>
             </div>
         </div>
