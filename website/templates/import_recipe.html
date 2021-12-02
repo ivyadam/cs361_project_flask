@@ -41,12 +41,12 @@
                                     <input type="hidden" name="ingredients" id="ingredients" value="{{ingredients}}">
                                     <input type="hidden" name="instructions" id="instructions" value="{{instructions}}">
                                     <input type="hidden" name="recipeURL" id="recipeURL" value="{{recipeURL}}">
-                                    <td><select id="type" name="type" multiple>
+                                    <td><select id="type" name="type">
                                         {% for type in recipeTypes %}
                                         <option value="{{type[0]}}">{{type[1]}}</option>
                                         {% endfor %}
                                     </select></td>
-                                    <td><select id="cuisine" name="cuisine" multiple>
+                                    <td><select id="cuisine" name="cuisine">
                                         {% for type in cuisineTypes %}
                                         <option value="{{type[0]}}">{{type[1]}}</option>
                                         {% endfor %}
@@ -56,14 +56,12 @@
                                         <option value="{{type[0]}}">{{type[1]}}</option>
                                         {% endfor %}
                                     </select></td>
-                                    <td><input type="button" value="Save Recipe" /></td>
+                                    <td><button type="submit" formaction="/add_recipe" formmethod="post">Save</button></td>
                                 </form>
                             </tr>
                         </table>
+                        <div><p>Source:  <a href={{recipeURL}} target="_blank">{{recipeURL}}</a></p></div>
                     </div>
-                    <!-- <div id="source">
-                        Source:  <a href={{recipeURL}} target="_blank">{{recipeURL}}</a>
-                    </div> -->
                 </div>
             </div>
         </div>

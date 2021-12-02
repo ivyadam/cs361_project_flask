@@ -1,14 +1,14 @@
-from flask import Flask, render_template, url_for
-from flask import request, redirect, jsonify
+from flask import Flask, render_template, url_for, request, redirect, jsonify, flash
 from db_connector.db_connector import connect_to_database, execute_query
 from flask_restful import Resource, Api
 from flask_cors import CORS
 import json
 import requests
 
-#create the web application
+# Create the web application
 webapp = Flask(__name__)
 
+# Capture information for the sidebar
 def get_sidebar_recipe_details() -> []:
     db_connection = connect_to_database()
     recipeTypeQuery = "SELECT recipeTypeID, recipeTypeName FROM recipetype;"
@@ -19,6 +19,42 @@ def get_sidebar_recipe_details() -> []:
     avoidTypes = execute_query(db_connection, avoidTypeQuery).fetchall()
     return [recipeTypes, cuisineTypes, avoidTypes]
 
+# Check if a recipe already exists in the database
+def does_recipe_exist(recipeURL) -> []:
+    db_connection = connect_to_database()
+    existQuery = "SELECT recipeID, isDeleted FROM recipes where url = '%s';"
+    data = (recipeURL)
+    result = execute_query(db_connection, existQuery, data).fetchone()
+    if result == None:
+        recipeFound = False
+        isDeleted = False
+    else:
+        recipeFound = True
+        if result[1] == 0:
+            isDeleted = False
+        else:
+            isDeleted = True
+    return [recipeFound, isDeleted]
+
+# Add a recipe to the database
+def add_recipe(recipeName, recipeURL, recipeType, cuisineType):
+    db_connection = connect_to_database()
+    insertQuery = "INSERT INTO recipes "
+    insertQuery += "(recipeName, url, isDeleted, recipeType, cuisineType) VALUES "
+    insertQuery += "(%s,%s,0,%s,%s);"
+    data = (recipeName, recipeURL, recipeType, cuisineType)
+    execute_query(db_connection, insertQuery, data)
+    return
+
+# Undelete a recipe
+def undelete_recipe(recipeURL):
+    db_connection = connect_to_database()
+    updateQuery = "UPDATE recipes SET isDeleted = 0 WHERE url = %s;"
+    data = (recipeURL)
+    execute_query(db_connection, updateQuery, data)
+    return
+
+# Handler for homepage
 @webapp.route('/')
 def index():
         db_details = get_sidebar_recipe_details()
@@ -27,6 +63,7 @@ def index():
         avoidTypes = db_details[2]        
         return render_template('home.html', recipeTypes = recipeTypes, cuisineTypes = cuisineTypes, avoidTypes = avoidTypes)
 
+# Handler to retrieve recipe
 @webapp.route('/get_recipe', methods=['POST'])
 def getRecipe():
     newUrl = request.form['url']
@@ -47,6 +84,28 @@ def getRecipe():
         cuisineTypes = cuisineTypes, 
         avoidTypes = avoidTypes
     )
+
+# Handler to add a recipe
+@webapp.route('/add_recipe', methods=['POST'])
+def addRecipe():
+    recipeURL = request.form['recipeURL']
+    existing = does_recipe_exist(recipeURL)
+    if existing[0]:
+        # Recipe already exists in the database. 
+        if existing[1]:
+            # If it's been deleted, reactivate it.
+            undelete_recipe(recipeURL)
+        else:
+            # Recipe already exists and it's not deleted.
+            print('Recipe already present.')
+    else:
+        # Recipe doesn't exist. Add it to the database.
+        recipeName = request.form['recipeName']
+        recipeType = request.form['type']
+        cuisineType = request.form['cuisine']
+        add_recipe(recipeName, recipeURL, recipeType, cuisineType)
+    flash("Recipe added successfully!")
+    return redirect('/')
 
 # @webapp.route('/home')
 # def home():
