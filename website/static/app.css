@@ -1,6 +1,7 @@
 .header {
   background-color: #93ced6;
   height: 150px;
+  top: 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,18 +11,19 @@
   border-bottom: 2px;
   border-bottom-style: solid;
   border-color: black;
-  position: fixed;
+  z-index: 1;
+  position: sticky;
 }
 
 .sidebar {
   background-color: rgb(201, 207, 212);
   width: 225px;
-  /* height: 100%; */
-  /* position: fixed; */
+  height: 100%;
+  position: fixed;
   z-index: 1;
-  top: 0;
+  top: 150;
   left: 0;
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
   transition: 0.25s;
   padding-left: 5px;
   padding-right: 5px;
@@ -33,7 +35,7 @@
 
 .foodRestrictions {
   position: relative;
-  bottom:auto;
+  padding-top: 100%;
   text-align: left;
 }
 
@@ -43,7 +45,7 @@ select {
 
 .newRecipe {
   position: relative;
-  bottom: auto;
+  padding-top: 60%;
   text-align: left;
 }
 
@@ -56,7 +58,7 @@ select {
   color: white;
   float: right;
   padding-top: 10px;
-  padding-bottom: 10%;
+  padding-bottom: 10px;
   padding-left: 30px;
   padding-right: 30px;
   font-size: 11pt;
@@ -65,27 +67,27 @@ select {
 .sidebar .addRecipe input[type=button] {
   float: right;
   padding-top: 5px;
-  padding-bottom: 10%;
+  padding-bottom: 5px;
   padding-left: 10px;
   padding-right: 10px;
 }
 
-.settings {
+/* .settings {
   position: static;
   bottom: 20%;
-}
+} */
 
 #mainpage, #recipe {
   padding-left: 225px;
 }
 
 #mainpage {
-  position: fixed;
-  bottom: auto;
+  position: relative;
+  padding-top: 10%;
   max-width: 60%;
-  margin: auto;
+  margin: 0 auto;
   padding-left: 225px;
-  padding-top: 150px;
+  overflow: auto;
 }
 
 #mainbody {
@@ -118,7 +120,7 @@ select {
   right: 10px;
 }
 
-#restrictionsTable {
+/* #restrictionsTable {
   padding-left: 20px;
   padding-right: 20px;
   border: 2px;
@@ -129,7 +131,7 @@ select {
 table, thead, tbody, tr, td, th {
   padding-left: 10px;
   padding-right: 10px;
-}
+} */
 
 #Print, #Reset, #Delete {
   font-size: 12pt;

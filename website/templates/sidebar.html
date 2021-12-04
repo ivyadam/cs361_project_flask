@@ -7,28 +7,28 @@
     <body>
         <div class="sidebar">
             <div class="foodRestrictions">
-                <form id="foodRestrictions">
+                <form id="foodRestrictions" action="/generate_random" method="post">
                     <label>Recipe Type</label><br></br> 
-                    <select id="type" name="type" multiple>
+                    <select id="recipeTypes" name="recipeTypes" multiple>
                         {% for type in recipeTypes %}
                         <option value="{{type[0]}}">{{type[1]}}</option>
                         {% endfor %}
                     </select>
                 <br></br>
                     <label>Cuisine</label><br></br>
-                    <select id="cuisine" name="cuisine" multiple>
+                    <select id="cuisineTypes" name="cuisineTypes" multiple>
                         {% for type in cuisineTypes %}
                         <option value="{{type[0]}}">{{type[1]}}</option>
                         {% endfor %}
                     </select>
                     <br></br>
                     <label>Foods to Avoid </label><br></br>
-                    <select id="avoid" name="avoid" multiple>
+                    <select id="avoidTypes" name="avoidTypes" multiple>
                         {% for type in avoidTypes %}
-                        <option value="{{type0}}">{{type[1]}}</option>
+                        <option value="{{type[0]}}">{{type[1]}}</option>
                         {% endfor %}
                     </select>
-                    <input type="button" value="Generate!"></input>
+                    <input type="submit" value="Generate!"></input>
                 </form>
             </div>
             <div class="newRecipe">

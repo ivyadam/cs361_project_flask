@@ -7,33 +7,38 @@
     <body>
         <div>
             <div>{% include 'header.html' %}</div>
-            <div id="image"><img width="250" height="250" src={{imageURL}}></div>
-            <div id="add_recipe">
-                <h1><u>{{name}}</u></h1>
-                <div id="ingredients">
-                    <p><h3>Ingredients</h3></p>
-                    <ul id="ingredientsList">
-                        {% for ingredient in ingredients %}
-                        <li>{{ingredient}}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div id="directions">
-                    <p><h3>Directions</h3></p>
-                    <ul id="directionsList">
-                        {% for instruction in instructions %}
-                            <li>{{instruction['instruction']}}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <br><br><br><br>
-                <div id="source">
-                    Source:  <a href={{recipeURL}} target="_blank">{{recipeURL}}</a>
-                </div>
-                <div id="recipeButtons">
-                    <button id="Delete">Delete</button>
-                    <button id="Print">Print</button>
-                    <button id="Reset">Reset</button>
+            <div>{% include 'sidebar.html' %}</div>
+            <div id="mainpage">
+                <div id="image"><img width="250" height="250" src={{imageURL}}></div>
+                <div id="add_recipe">
+                    <h1><u>{{name}}</u></h1>
+                    <div id="ingredients">
+                        <p><h3>Ingredients</h3></p>
+                        <ul id="ingredientsList">
+                            {% for ingredient in ingredients %}
+                            <li>{{ingredient}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div id="directions">
+                        <p><h3>Directions</h3></p>
+                        <ul id="directionsList">
+                            {% for instruction in instructions %}
+                                <li>{{instruction['instruction']}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <br><br>
+                    <div id="source">
+                        Source:  <a href={{recipeURL}} target="_blank">{{recipeURL}}</a>
+                    </div><br><br>
+                    <div id="recipeButtons">
+                        <form>
+                            <input type="hidden" id="url" name="url" value="{{recipeURL}}">
+                            <button type="submit" formaction="/delete_recipe" formmethod="post">Delete</button>
+                            <button onclick="window.print()">Print</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
