@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href='../static/app.css' />
+    </head>
+    <body>
+        <div>{% include 'header.html' %}</div>
+        <div>{% include 'sidebar.html' %}</div>
+        <div>
+            <div id="mainpage">
+                <p><h1>Update Restriction</h1></p>
+                <div id="mainbody">
+                    <h3>Recipe Type</h3>
+                    <table>
+                        <thead>
+                            <th>Type</th>
+                            <th>Delete</th>
+                        </thead>
+                        <tbody>
+                            {% for type in recipeTypes %}
+                            <form>
+                                <input type="hidden" id="recipeTypeID" name="recipeTypeID" value={{type[0]}}>
+                                <td>{{type[1]}}</td>
+                                <td><button type="submit" formaction="/delete_recipe_type" formmethod="post">Delete</button></td>
+                            </form>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <p>
+                        <form id="addRecipeType" action="/add_recipe_type" method="post">
+                            <h4>Add Recipe Type</h4>
+                            <label>Recipe Type:  </label>
+                            <input type="text" name="recipeType" required><br>
+                            <p><input type="submit" value="Create Recipe Type"></p>
+                        </form>
+                    </p>
+                    <h3>Cuisine</h3>
+                    <table>
+                        <thead>
+                            <th>Type</th>
+                            <th>Delete</th>
+                        </thead>
+                        <tbody>
+                            {% for type in cuisineTypes %}
+                            <form>
+                                <input type="hidden" id="cuisineTypeID" name="cuisineTypeID" value={{type[0]}}>
+                                <td>{{type[1]}}</td>
+                                <td><button type="submit" formaction="/delete_cuisine_type" formmethod="post">Delete</button></td>
+                            </form>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <p>
+                        <form id="addCuisineType" action="/add_cuisine_type" method="post">
+                            <h4>Add Cuisine Type</h4>
+                            <label>Cuisine Type:  </label>
+                            <input type="text" name="cuisineType" required><br>
+                            <p><input type="submit" value="Create Cuisine Type"></p>
+                        </form>
+                    </p>
+                    <h3>Foods to Avoid</h3>
+                    <table>
+                        <thead>
+                            <th>Type</th>
+                            <th>Delete</th>
+                        </thead>
+                        <tbody>
+                            {% for type in avoid %}
+                            <form>
+                                <input type="hidden" id="restrictionID" name="restrictionID" value={{type[0]}}>
+                                <td>{{type[1]}}</td>
+                                <td><button type="submit" formaction="/delete_restriction_type" formmethod="post">Delete</button></td>
+                            </form>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <p>
+                        <form id="addRestrictionType" action="/add_restriction_type" method="post">
+                            <h4>Add Food to Avoid</h4>
+                            <label>Food to Avoid:  </label>
+                            <input type="text" name="restrictionType" required><br>
+                            <p><input type="submit" value="Create Food to Avoid"></p>
+                        </form>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

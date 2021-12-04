@@ -120,9 +120,72 @@ def addRecipe():
         recipeType = request.form['type']
         cuisineType = request.form['cuisine']
         recipeRestrictions = request.form.getlist('avoid')
-        print(request.form)
-        print(recipeRestrictions)
         add_recipe(recipeName, recipeURL, recipeType, cuisineType)
         add_recipe_restrictions(recipeURL, recipeRestrictions)
-    # flash("Recipe added successfully!")
-    return redirect('/')
+    return render_template('add_successful.html')
+
+# Handler for settings
+@webapp.route('/settings')
+def settings():
+    db_details = get_sidebar_recipe_details()
+    recipeTypes = db_details[0]
+    cuisineTypes = db_details[1]
+    avoidTypes = db_details[2]        
+    return render_template('settings.htmnl', recipeTypes = recipeTypes, cuisineTypes = cuisineTypes, avoidTypes = avoidTypes)
+
+# Handler for adding recipe type
+@webapp.route('/add_recipe_type', methods=['POST'])
+def addRecipeType():
+    db_connection = connect_to_database()
+    insertQuery = "INSERT INTO recipetype (recipeTypeName) VALUES"
+    insertQuery = insertQuery + "('" + str(request.form['recipeType']) + "');"
+    execute_query(db_connection, insertQuery)
+    return redirect('/settings')
+
+# Handler for adding cuisine type
+@webapp.route('/add_cuisine_type', methods=['POST'])
+def addCuisineType():
+    db_connection = connect_to_database()
+    insertQuery = "INSERT INTO cuisinetype (cuisineTypeName) VALUES"
+    insertQuery = insertQuery + "('" + str(request.form['cuisineType']) + "');"
+    execute_query(db_connection, insertQuery)
+    return redirect('/settings')
+
+# Handler for adding restriction type
+@webapp.route('/add_restriction_type', methods=['POST'])
+def addRestrictionType():
+    db_connection = connect_to_database()
+    insertQuery = "INSERT INTO foodstoavoid (restrictionName) VALUES"
+    insertQuery = insertQuery + "('" + str(request.form['restrictionType']) + "');"
+    execute_query(db_connection, insertQuery)
+    return redirect('/settings')
+
+# Handler for deleting recipe type
+@webapp.route('/delete_recipe_type', methods=['POST'])
+def deleteRecipeType():
+    db_connection = connect_to_database()
+    updateQuery = "UPDATE recipes SET recipeType = NULL WHERE recipeType = " + str(request.form['recipeTypeID']) + ";"
+    execute_query(db_connection, updateQuery)
+    deleteQuery = "DELETE FROM recipetype WHERE recipeTypeID = " + str(request.form['recipeTypeID']) + ";"
+    execute_query(db_connection, deleteQuery)
+    return redirect('/settings')
+
+# Handler for deleting cuisine type
+@webapp.route('/delete_cuisine_type', methods=['POST'])
+def deleteCuisineType():
+    db_connection = connect_to_database()
+    updateQuery = "UPDATE recipes SET cuisineType = NULL WHERE cuisineType = " + str(request.form['cuisineTypeID']) + ";"
+    execute_query(db_connection, updateQuery)
+    deleteQuery = "DELETE FROM cuisinetype WHERE cuisineTypeID = " + str(request.form['cuisineTypeID']) + ";"
+    execute_query(db_connection, deleteQuery)
+    return redirect('/settings')
+
+# Handler for deleting restriction type
+@webapp.route('/delete_restriction_type', methods=['POST'])
+def deleteRestrictionType():
+    db_connection = connect_to_database()
+    deleteQuery = "DELETE FROM reciperestrictions WHERE restrictionID = " + str(request.form['restrictionID']) + ";"
+    execute_query(db_connection, deleteQuery)
+    deleteQuery = "DELETE FROM foodstoavoid WHERE restrictionID = " + str(request.form['restrictionID']) + ";"
+    execute_query(db_connection, deleteQuery)
+    return redirect('/settings')
