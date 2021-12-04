@@ -131,7 +131,10 @@ def settings():
     recipeTypes = db_details[0]
     cuisineTypes = db_details[1]
     avoidTypes = db_details[2]        
-    return render_template('settings.htmnl', recipeTypes = recipeTypes, cuisineTypes = cuisineTypes, avoidTypes = avoidTypes)
+    return render_template('settings.html', 
+        recipeTypes = recipeTypes, 
+        cuisineTypes = cuisineTypes, 
+        avoidTypes = avoidTypes)
 
 # Handler for adding recipe type
 @webapp.route('/add_recipe_type', methods=['POST'])

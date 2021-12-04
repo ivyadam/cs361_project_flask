@@ -10,6 +10,7 @@
   border-bottom: 2px;
   border-bottom-style: solid;
   border-color: black;
+  position: fixed;
 }
 
 .sidebar {
@@ -32,7 +33,7 @@
 
 .foodRestrictions {
   position: relative;
-  /* padding-bottom: 25px; */
+  bottom:auto;
   text-align: left;
 }
 
@@ -42,7 +43,7 @@ select {
 
 .newRecipe {
   position: relative;
-  padding-top: 60%;
+  bottom: auto;
   text-align: left;
 }
 
@@ -69,16 +70,22 @@ select {
   padding-right: 10px;
 }
 
+.settings {
+  position: static;
+  bottom: 20%;
+}
+
 #mainpage, #recipe {
   padding-left: 225px;
 }
 
 #mainpage {
-  position: relative;
-  /* padding-top: 10%; */
+  position: fixed;
+  bottom: auto;
   max-width: 60%;
   margin: auto;
   padding-left: 225px;
+  padding-top: 150px;
 }
 
 #mainbody {
@@ -109,6 +116,19 @@ select {
   position: relative;
   bottom: 10px;
   right: 10px;
+}
+
+#restrictionsTable {
+  padding-left: 20px;
+  padding-right: 20px;
+  border: 2px;
+  border-color: black;
+  border-style: solid;
+}
+
+table, thead, tbody, tr, td, th {
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 #Print, #Reset, #Delete {
